@@ -1,0 +1,135 @@
+\documentclass[11pt]{report}
+\renewcommand{\thesection}{\arabic{section}}
+
+\usepackage{amssymb} % For useful math symbols
+\usepackage{enumitem} % For controlling how the enumeration behaves
+\usepackage{amsmath} % For align environment
+
+\usepackage{graphicx} % For inserting images
+\graphicspath{ {./images/} }
+
+\usepackage{geometry} % For changing the margins
+\geometry{legalpaper, margin=1.5in, headheight = 14pt}
+
+\usepackage{xcolor} % Creating/using colors for the background of code snippets
+\definecolor{DBGGray}{gray}{0.15}
+\definecolor{LBGGray}{gray}{0.9}
+
+\usepackage{fancyhdr} % Styling the headers/footers of document
+
+% Code snippets
+\usepackage{minted}
+
+% For drawing graphs for CS courses
+\usepackage{tikz}
+
+\def\dark{0} % 1 means enable dark mode, anything else means light mode
+
+\ifx\dark\undefined
+	% Light mode by default
+	\newcommand{\TextColor}{black}
+	\newcommand{\PageColor}{white}
+	\usemintedstyle{one-dark, bgcolor=LBGGray, tabsize=4, autogobble}
+\else
+	\if\dark1
+		% Dark mode
+		\newcommand{\TextColor}{white}
+		\newcommand{\PageColor}{black}
+		\usemintedstyle{one-dark, bgcolor=DBGGray, tabsize=4, autogobble}
+	\else
+		% Light mode
+		\newcommand{\TextColor}{black}
+		\newcommand{\PageColor}{white}
+		\usemintedstyle{one-dark, bgcolor=LBGGray, tabsize=4, autogobble}
+	\fi
+\fi
+
+% Languages whose stylings you want in the document
+\newminted{java}{}
+\newminted{c}{}
+\newminted{r}{}
+
+\pagecolor{\PageColor}
+\color{\TextColor}
+
+\newcommand{\HomeworkTitle}{HWX - CLASS 420} % Put the name of the assignment here!
+\newcommand{\HomeworkAuthor}{Shriansh Chari} % The author of the assignment (should be me)
+\newcommand{\HomeworkDate}{April 20, 2069}
+
+\fancyhf{}
+
+\pagestyle{fancy}
+\fancyhead{}
+\fancyhead[L]{\HomeworkAuthor}
+\fancyhead[C]{\HomeworkTitle}
+\fancyhead[R]{Page \thepage}
+\fancyfoot{}
+
+\title{\textbf{\HomeworkTitle}}
+\author{\HomeworkAuthor}
+\date{\HomeworkDate}
+
+\begin{document}
+
+\maketitle
+
+\section{Question 1}
+\begin{enumerate}[label = \alph*.]
+	\item \begin{javacode}
+			public class SomeCode {
+				public static void main(String[] args) {
+					System.out.println("Here is some code I can write" +
+						"in LaTeX!");
+				}
+			}
+	      \end{javacode}
+
+	\item \begin{ccode}
+			#include <stdio.h>
+
+			int main() {
+				printf("Code can be written in different langs!");
+
+				return 0;
+			}
+	      \end{ccode}
+
+	\item \begin{rcode}
+		      print("I've used it a lot for R homework")
+
+		      # Though I'm not using enough syntax here to distinguish R from
+		      # Python or Lua...
+	      \end{rcode}
+\end{enumerate}
+
+\newpage
+
+\section{Question 2}
+
+Notice the neat header on the top of the page!
+
+It's also useful to have the page number up there so that it won't be isolated in the footer.
+
+Hey look, a red-black tree!
+
+\begin{center}
+	\begin{tikzpicture}
+		\tikzstyle{state} = [draw, circle]
+		\node [state]{5}
+		child {node [state, xshift=-0.75cm]{3}
+				child [red] {node [state]{1}
+						child [\TextColor] {node [state]{0}}
+						child [\TextColor] {node [state]{2}}}
+				child {node [state] {4}}}
+		child {node [state, xshift=0.75cm]{10}
+				child {node [state]{8}}
+				child [red] {node [state]{12}
+						child [\TextColor] {node [state] {11}}
+						child [\TextColor] {node [state] {14}}}};
+	\end{tikzpicture}
+
+	I made this red-black tree using \Verb|tikz|.
+\end{center}
+
+\end{document}
+
